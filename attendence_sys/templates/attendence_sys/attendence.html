@@ -1,0 +1,95 @@
+{% extends 'attendence_sys/main.html' %}
+{% block content %}
+{% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endif %}
+	{% endfor %}
+{% if ta == False %}
+<center><h1>Search Attendence</h1></center>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+
+			<center>
+				<form method="get">
+					{{myFilter.form}}
+
+		    		<button class="btn btn-primary" type="submit">Search</button>
+				</form>
+			</center>
+		</div>
+	</div>
+</div>
+<br>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Student ID</th>
+					<th>Branch</th>
+					<th>Year</th>
+					<th>Section</th>
+					<th>Period</th>
+					<th>Status</th>
+				</tr>
+
+				{% for attendence in attendences %}
+
+				<tr>
+                    <td>{{ attendence.Student_ID }}</td>
+					<td>{{ attendence.branch }}</td>
+					<td>{{ attendence.year }}</td>
+					<td>{{ attendence.section }}</td>
+					<td>{{ attendence.period }}</td>
+					<td>{{ attendence.status }}</td>
+				</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+{% else %}
+	<center><h1>Present Period Attendence</h1></center>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card card-body">
+				<table class="table table-sm">
+					<tr>
+						<th>Student ID</th>
+						<th>Branch</th>
+						<th>Year</th>
+						<th>Section</th>
+						<th>Period</th>
+						<th>Status</th>
+					</tr>
+	
+					{% for attendence in attendences %}
+	
+					<tr>
+						<td>{{ attendence.Student_ID }}</td>
+						<td>{{ attendence.branch }}</td>
+						<td>{{ attendence.year }}</td>
+						<td>{{ attendence.section }}</td>
+						<td>{{ attendence.period }}</td>
+						<td>{{ attendence.status }}</td>
+					</tr>
+					{% endfor %}
+	
+				</table>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+
+{% endblock %}

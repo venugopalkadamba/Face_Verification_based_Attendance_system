@@ -1,0 +1,36 @@
+{% extends 'attendence_sys/main.html' %}
+{% block content %}
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+</style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-body">
+                    <a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
+                    <hr>
+                    <h3 style="text-align: center">Student Profile Pic</h3>
+                    <hr>
+                    <img class="img-responsive profile-pic" src="{{ student.profile_pic.url }}" >
+                </div>
+            </div>
+            <div class="col-md-9">
+                <form action="{% url 'updateStudent' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group" style="visibility: hidden !important;margin-top: -40px;">
+                        <input type="text" class="form-control" value="{{ prev_reg_id }}" name="prev_reg_id">
+                    </div>
+                    {{ form.as_p }}
+                    <input class="btn btn-primary" type="submit" name="Update Information">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

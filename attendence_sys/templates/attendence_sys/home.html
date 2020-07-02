@@ -1,0 +1,165 @@
+{% extends 'attendence_sys/main.html' %}
+
+{% block content %}
+<div class="container">
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-6" style="margin-top: 20px;">
+            <div class="card card-body">
+                <center><h3>Take Attendence</h3></center>
+                <form class="form-horizontal" action="{% url 'attendence' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="sel1">Select Branch:</label>
+                        <select name='branch' class="form-control" id="sel1">
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="MECH">MECH</option>
+                            <option value="CHEM">CHEM</option>
+                            <option value="CIVIL">CIVIL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1">Select Year:</label>
+                        <select name='year' class="form-control" id="sel1">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1">Select Section:</label>
+                        <select name='section' class="form-control" id="sel1">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1">Select Period:</label>
+                        <select name='period' class="form-control" id="sel1">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-info">Take Attendence</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 20px;">
+            <div class="card card-body">
+                <center><h3>Add Student</h3></center>
+                <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Enter First Name:</label>
+                                {{ studentForm.firstname }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Enter Last Name:</label>
+                                {{ studentForm.lastname }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Enter Registration ID:</label>
+                                {{ studentForm.registration_id }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="sel1">Select Branch:</label>
+                                {{ studentForm.branch }}
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="sel1">Select Year:</label>
+                                {{ studentForm.year }}
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="sel1">Select Section:</label>
+                                {{ studentForm.section }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="form-group" style="border: none;">
+                                <label class="control-label">Upload Profile Picture:</label>
+                                {{ studentForm.profile_pic }}
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-info">Submit</button>    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-md-6" style="margin-top: 20px;">
+            <div class="card card-body">
+                <center><h3>Update Student Details</h3></center>
+                <form class="form-horizontal" action="{% url 'updateStudentRedirect' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="control-label">Enter Student Registration ID:</label>
+                        <input name="reg_id" type="text" class="form-control" placeholder="Ex: 18341A1234">
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1">Select Branch:</label>
+                        <select name='branch' class="form-control" id="sel1">
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="MECH">MECH</option>
+                            <option value="CHEM">CHEM</option>
+                            <option value="CIVIL">CIVIL</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-info">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 20px;;">
+            <div class="card card-body">
+                <center><h3>Search Attendence</h3></center>
+                    <a href="{% url 'searchattendence' %}" class="btn btn-block btn-info">Click Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
