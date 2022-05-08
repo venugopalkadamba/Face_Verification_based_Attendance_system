@@ -18,6 +18,6 @@ python manage.py runserver
 python manage.py createsuperuser
 ```
 <br/>
-After running the above command and creating the credentials, you can use the same credentials for logging in.
+After running the above command and creating the credentials, you can use the same credentials for logging in.<br/>
 ## Live Video of Attendance System
 ![alt text](https://github.com/venugopalkadamba/Face_Verification_based_Attendance_system/blob/master/Final_video.gif)
