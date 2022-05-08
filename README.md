@@ -12,5 +12,12 @@ pip3 install -r requirements.txt
 ```python
 python manage.py runserver
 ``` 
+
+**To create your own credential for logging into the application**<br/>
+```python
+python manage.py createsuperuser
+```
+<br/>
+After running the above command and creating the credentials, you can use the same credentials for logging in.
 ## Live Video of Attendance System
 ![alt text](https://github.com/venugopalkadamba/Face_Verification_based_Attendance_system/blob/master/Final_video.gif)
