@@ -143,12 +143,19 @@ def searchAttendence(request):
     return render(request, 'attendence_sys/attendence.html', context)
 
 
+@login_required(login_url='login')
 def facultyProfile(request):
-    faculty = request.user.faculty
-    form = FacultyForm(instance = faculty)
-    context = {'form':form}
+    try:
+        # Attempt to retrieve the faculty profile associated with the user
+        faculty = request.user.faculty
+    except Faculty.DoesNotExist:
+        # If the faculty profile does not exist, handle it gracefully
+        messages.warning(request, 'Faculty profile does not exist. Please create your faculty profile.')
+        return redirect('create_faculty_profile')  # Redirect to a page to create faculty profile
+    
+    form = FacultyForm(instance=faculty)
+    context = {'form': form}
     return render(request, 'attendence_sys/facultyForm.html', context)
-
 
 
 # class VideoCamera(object):
